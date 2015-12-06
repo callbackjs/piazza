@@ -47,7 +47,7 @@ function renderQuestionForm() {
  */
 function renderQuestions(questionsObj) {
   var questions = questionsObj.questions;
-  if (questions) {
+  if (questions.length > 0) {
     var children = questions.map(function(question) {
       // `id` represents this question"s identifier in localStorage.
       return tag("div", {
@@ -76,7 +76,11 @@ function renderQuestions(questionsObj) {
  * question - the question text
  * responses - an array of responses with the `name` and `response` fields
  */
-function renderExpandedQuestion(subject, question, responses) {
+function renderExpandedQuestion(questionObj) {
+  var subject = questionObj.subject;
+  var question = questionObj.question;
+  var responses = questionObj.responses;
+
   if (responses.length === 0)  {
     responses = tag("p", "No responses submitted yet!");
   } else {
@@ -104,7 +108,7 @@ function renderExpandedQuestion(subject, question, responses) {
 
     tag("div", {class: "responses"}, [
       tag("h3", "Responses"),
-      responses
+      tag("div", responses)
     ]),
 
     tag("form", {
