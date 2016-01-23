@@ -1,27 +1,27 @@
-// Creates an HTMLElement to display question form in #main-panel tag
+/* Creates an HTMLElement to display question form in #main-panel tag */
 function renderQuestionForm() {
   var questionForm = tag("form", {
     class: "cf",
     id: "question-form"
   }, [
-    tag("h2", [
+    tag("h2", {}, [
       "Welcome to ",
-      tag("span", "Callback Piazza"),
+      tag("span", {}, "Callback Piazza"),
       "!"
     ]),
 
-    tag("p", "Enter a subject and question to get started."),
+    tag("p", {}, "Enter a subject and question to get started."),
 
-    tag("div", [
-      tag("input", {
+    tag("div", {}, [
+      tag("input", {}, {
         type: "text",
         name: "subject",
         placeholder: "Subject"
       }, [])
     ]),
 
-    tag("div", [
-      tag("textarea", {
+    tag("div", {}, [
+      tag("textarea", {}, {
         rows: "5",
         cols: "40",
         name: "question",
@@ -29,7 +29,7 @@ function renderQuestionForm() {
       }, [])
     ]),
 
-    tag("input", {
+    tag("input", {}, {
       type: "submit",
       name: "subject",
       placeholder: "Subject"
@@ -42,27 +42,25 @@ function renderQuestionForm() {
 /* Creates an HTMLElement to display all questions in #left-pane tag.
  *
  * Arguments:
- * questionsObj -- an object with a `questions` key that maps to an array of
- *    question objects with subject and question fields
+ * questions -- an array of question objects with subject and question fields
  */
-function renderQuestions(questionsObj) {
-  var questions = questionsObj.questions;
+function renderQuestions(questions) {
   if (questions.length > 0) {
     var children = questions.map(function(question) {
-      // `id` represents this question"s identifier in localStorage.
-      return tag("div", {
+      // id represents this question"s identifier in localStorage.
+      return tag("div", {}, {
         class: "list-question question-info",
         id: question.id
       }, [
-        tag("h3", question.subject),
-        tag("p", question.question)
+        tag("h3", {}, question.subject),
+        tag("p", {}, question.question)
       ]);
     });
 
-    return tag("div", children);
+    return tag("div", {}, children);
   } else {
     return tag("div", {class: "list-question"}, [
-      tag("p", "No questions could be found.")
+      tag("p", {}, "No questions could be found.")
     ]);
   }
 }
@@ -74,52 +72,50 @@ function renderQuestions(questionsObj) {
  * Arguments:
  * subject - the subject text for the question
  * question - the question text
- * responses - an array of responses with the `name` and `response` fields
+ * responses - an array of responses with the name and response fields
  */
 function renderExpandedQuestion(questionObj) {
   var subject = questionObj.subject;
   var question = questionObj.question;
   var responses = questionObj.responses;
 
-  if (responses.length === 0)  {
-    responses = tag("p", "No responses submitted yet!");
+  if (responses.length === 0) {
+    responses = tag("p", {}, "No responses submitted yet!");
   } else {
     responses = responses.map(function(response) {
       return tag("div", {class: "response"}, [
-        tag("h4", response.name),
-        tag("p", response.response)
+        tag("h4", {}, response.name),
+        tag("p", {}, response.response)
       ]);
     });
   }
 
-  return tag("div", [
-    tag("h3", "Question"),
+  return tag("div", {}, [
+    tag("h3", {}, "Question"),
     tag("div", {class: "question"}, [
-      tag("h4", subject),
-      tag("p", question)
+      tag("h4", {}, subject),
+      tag("p", {}, question)
     ]),
 
     tag("div", {class: "resolve-container"}, [
       tag("a", {
         href: "#",
         class: "resolve btn"
-      }, "Resolve"),
+      }, "Resolve")
     ]),
 
     tag("div", {class: "responses"}, [
-      tag("h3", "Responses"),
-      tag("div", responses)
+      tag("h3", {}, "Responses"),
+      tag("div", {}, responses)
     ]),
 
     tag("form", {
       class: "cf",
       id: "response-form"
     }, [
-      tag("h3", [
-        "Add Response"
-      ]),
+      tag("h3", {}, "Add Response"),
 
-      tag("div", [
+      tag("div", {}, [
         tag("label", {for: "name"}, "Name"),
         tag("input", {
           type: "text",
@@ -128,12 +124,12 @@ function renderExpandedQuestion(questionObj) {
         }, [])
       ]),
 
-      tag("div", [
+      tag("div", {}, [
         tag("label", {for: "response"}, "Response"),
         tag("textarea", {
           rows: "5",
           cols: "40",
-          name: "response",
+          name: "response"
         }, [])
       ]),
 
@@ -171,12 +167,6 @@ function renderExpandedQuestion(questionObj) {
  *    </div>
  */
 function tag(name, attrs, contents) {
-  // attrs is optional
-  if (!contents) {
-    contents = attrs;
-    attrs = [];
-  }
-
   var element = document.createElement(name);
   for (var attr in attrs) {
     element.setAttribute(attr, attrs[attr]);
