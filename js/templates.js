@@ -13,7 +13,7 @@ function renderQuestionForm() {
     tag("p", {}, "Enter a subject and question to get started."),
 
     tag("div", {}, [
-      tag("input", {}, {
+      tag("input", {
         type: "text",
         name: "subject",
         placeholder: "Subject"
@@ -21,7 +21,7 @@ function renderQuestionForm() {
     ]),
 
     tag("div", {}, [
-      tag("textarea", {}, {
+      tag("textarea", {
         rows: "5",
         cols: "40",
         name: "question",
@@ -29,7 +29,7 @@ function renderQuestionForm() {
       }, [])
     ]),
 
-    tag("input", {}, {
+    tag("input", {
       type: "submit",
       name: "subject",
       placeholder: "Subject"
@@ -48,7 +48,7 @@ function renderQuestions(questions) {
   if (questions.length > 0) {
     var children = questions.map(function(question) {
       // id represents this question"s identifier in localStorage.
-      return tag("div", {}, {
+      return tag("div", {
         class: "list-question question-info",
         id: question.id
       }, [
@@ -144,21 +144,19 @@ function renderExpandedQuestion(questionObj) {
 
 /* Creates and returns an HTMLElement representing a tag of the given name.
  * attrs is an object, where the key-value pairs represent HTML attributes to
- * set on the tag. contents is an array of strings/HTMLElements (or just a single
- * string/HTMLElement) that will be contained within the tag.
- *
- * Note that attrs is an optional parameter, and can be ommitted.
+ * set on the tag. contents is an array of strings/HTMLElements (or just
+ * a single string/HTMLElement) that will be contained within the tag.
  *
  * Examples:
- * tag("p", "A simple paragraph") => <p>A simple paragraph</p>
- * tag("a", {href: "/about"}, "About") => <a href="/about">About</a>
+ * tag('p', {}, 'A simple paragraph') => <p>A simple paragraph</p>
+ * tag('a', {href: '/about'}, 'About') => <a href="/about">About</a>
  *
- * tag("ul", tag("li", "First item")) => <ul><li>First item</li></ul>
+ * tag('ul', {}, tag('li', {}, 'First item')) => <ul><li>First item</li></ul>
  *
- * tag("div", [
- *   tag("h1", {"class": "headline"}, "JavaScript"),
- *   " is awesome, ",
- *   tag("span", "especially in CS42.")
+ * tag('div', {}, [
+ *   tag('h1', {'class': 'headline'}, 'JavaScript'),
+ *   ' is awesome, ',
+ *   tag('span', {}, 'especially in CS42.')
  * ])
  * => <div>
  *      <h1 class="headline">JavaScript</h1>
@@ -182,7 +180,7 @@ function tag(name, attrs, contents) {
     if (piece instanceof HTMLElement) {
       element.appendChild(piece);
     } else {
-      // must create a text tag for a raw string
+      // must create a text node for a raw string
       element.appendChild(document.createTextNode(piece));
     }
   });
