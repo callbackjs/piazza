@@ -1,6 +1,6 @@
 /* Creates an HTMLElement to display question form in #main-panel tag */
 function renderQuestionForm() {
-  var questionForm = tag("form", {
+  return tag("form", {
     class: "cf",
     id: "question-form"
   }, [
@@ -31,12 +31,9 @@ function renderQuestionForm() {
 
     tag("input", {
       type: "submit",
-      name: "subject",
-      placeholder: "Subject"
+      class: "btn"
     }, [])
   ]);
-
-  return questionForm;
 }
 
 /* Creates an HTMLElement to display all questions in #left-pane tag.
@@ -135,8 +132,7 @@ function renderExpandedQuestion(questionObj) {
 
       tag("input", {
         type: "submit",
-        class: "btn",
-        value: "Subject"
+        class: "btn"
       }, [])
     ])
   ]);
