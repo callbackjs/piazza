@@ -1,5 +1,5 @@
 // pane elements
-var rightPane = document.getElementById('right-pane');
+const rightPane = document.getElementById('right-pane')
 // TODO: add other panes here
 
 // button and input elements
@@ -9,10 +9,10 @@ var rightPane = document.getElementById('right-pane');
 function getStoredQuestions() {
   if (!localStorage.questions) {
     // default to empty array
-    localStorage.questions = JSON.stringify([]);
+    localStorage.questions = JSON.stringify([])
   }
 
-  return JSON.parse(localStorage.questions);
+  return JSON.parse(localStorage.questions)
 }
 
 /* Store the given questions array in localStorage.
@@ -21,12 +21,12 @@ function getStoredQuestions() {
  * questions -- the questions array to store in localStorage
  */
 function storeQuestions(questions) {
-  localStorage.questions = JSON.stringify(questions);
+  localStorage.questions = JSON.stringify(questions)
 }
 
-// TODO: tasks 1-5 and one extension
-
 // display question form initially
-rightPane.appendChild(renderQuestionForm());
+rightPane.appendChild(renderQuestionForm())
 
 // TODO: display question list initially (if there are existing questions)
+
+// TODO: tasks 1-5 and one extension
